@@ -11,9 +11,10 @@ notifications:
 
 env:
     - CTEST_MODEL=Nightly
-cache: apt
 
-before_script:
+before_install:
+    - brew update 
+    - brew outdated xctool || brew upgrade xctool
     - brew install gsl
     - brew install homebrew/science/hdf5 
     - brew install python cmake 
@@ -21,9 +22,6 @@ before_script:
     - brew install homebrew/python/matplotlib
     - brew install pyqt
     - brew install openscenegraph
-
-install:
-    - echo "nothing to do here"
 
 script:
     - make BUILD=debug USE_NEUROKIT=1 && make clean
