@@ -17,13 +17,11 @@ before_install:
     - brew outdated xctool || brew upgrade xctool
     - brew install gsl
     - brew install homebrew/science/hdf5 
-    - brew install python cmake 
     - brew install homebrew/python/numpy 
     - brew install homebrew/python/matplotlib
     - brew install pyqt
-    - brew install openscenegraph
 
 script:
-    - make BUILD=debug USE_NEUROKIT=1 && make clean
-    - mkdir -p _build && cd _build && cmake -DDEBUG=ON -DWITH_DOC=ON .. && make
+    - make BUILD=debug USE_NEUROKIT=0 && make clean
+    - mkdir -p _build && cd _build && cmake -DDEBUG=ON .. && make -j8
     - ctest --output-on-failure
